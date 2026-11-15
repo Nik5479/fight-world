@@ -1694,7 +1694,7 @@ var an = [{
   En = `./assets/battle-CqvMijZR.mp3`,
   Dn = {modi:`./voices/nilesh.mp3`,yogi:`./voices/faraz.mp3`,didi:`./voices/mei.mp3`,nitin:`./voices/kenji.mp3`,trump:`./voices/jack.mp3`,dhruv:`./voices/mick.mp3`,rahul:`./voices/oliver.mp3`,ravi:`./voices/ivan.mp3`,amit:`./voices/lucas.mp3`,lalu:`./voices/diego.mp3`,mbapu:`./voices/titan.mp3`},
   On = yn,
-  kn = {},
+  kn = {modi:`./voices/nilesh.mp3`,yogi:`./voices/faraz.mp3`,didi:`./voices/mei.mp3`,nitin:`./voices/kenji.mp3`,trump:`./voices/jack.mp3`,dhruv:`./voices/mick.mp3`,rahul:`./voices/oliver.mp3`,ravi:`./voices/ivan.mp3`,amit:`./voices/lucas.mp3`,lalu:`./voices/diego.mp3`,mbapu:`./voices/titan.mp3`},
   An = Cn,
   jn = Sn,
   Mn = 1.43,
@@ -16222,7 +16222,12 @@ var Cf = class {
             }), n && this.finale && this.phaseTime > 1.7) {
             this.startEntrance();
             break
-          }!this.isGuest && this.phaseTime > 5.5 && (this.setPhase(`done`), this.endMatch());
+          }
+          this.cue(`winVoice`, 1.5, () => {
+            let w = this.match.winner !== null && Dn[this.fighters[this.match.winner].char.id];
+            w && !t.clipActive && t.playClip(w, 1.2)
+          });
+          !this.isGuest && this.phaseTime > 5.5 && (this.setPhase(`done`), this.endMatch());
           break
         }
         case `entrance`:
