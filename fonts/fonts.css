@@ -1,0 +1,34 @@
+@font-face{font-family:'Bebas Neue';font-weight:400;font-display:swap;src:url(bebas-neue-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Teko';font-weight:500;font-display:swap;src:url(teko-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Teko';font-weight:700;font-display:swap;src:url(teko-latin-700-normal.woff2) format('woff2')}
+#budget-meter,#touch-budget,#newsdesk,#online-btn,#legal{display:none!important}
+
+/* Fight World select-screen fixes */
+body:has(#select:not(.hidden)) #title,body:has(#select:not(.hidden)) #loading{display:none!important}
+#select h1{display:none}
+#select .pick-prompt{position:fixed;top:8px;left:50%;transform:translateX(-50%);font-size:clamp(20px,3.6vw,40px);letter-spacing:4px;white-space:nowrap}
+#select .grid{flex-wrap:nowrap;max-width:98vw}
+@media (max-width:1100px){html:not(.touch) #select .grid .tile,html.touch #select .grid .tile{width:min(64px,7.4vw)!important;height:min(76px,9vw)!important}#select .grid{gap:min(7px,.8vw)!important}#select .tile-name{font-size:min(13px,1.5vw)!important}}
+#select .sel-center{width:min(560px,46vw)}
+#howto-btn{position:fixed;top:12px;left:14px;z-index:61;background:#00000073;border:2px solid #ffe3a0b3;border-radius:22px;color:#ffe3a0;font-size:16px;letter-spacing:1px;padding:4px 14px 2px}
+#howto{position:fixed;inset:0;z-index:300;background:#000000b3;display:flex;align-items:center;justify-content:center}
+#howto.hidden{display:none}
+.howto-card{background:#1d120b;border:1px solid #ffd23f59;border-radius:14px;max-width:min(700px,94vw);padding:14px 18px;text-align:center}
+.howto-card h2{font-family:Bebas Neue,Impact,sans-serif;color:#ffd23f;font-size:30px;letter-spacing:2px}
+#howto .controls,#howto .touch-help,.pause-help .controls,.pause-help .touch-help{display:block!important;position:static!important;transform:none!important;font-family:system-ui,sans-serif;font-size:13px;line-height:1.6;background:none;max-width:none;width:auto}
+html.touch #howto .controls,html.touch .pause-help .controls{display:none!important}
+html:not(.touch) #howto .touch-help,html:not(.touch) .pause-help .touch-help{display:none!important}
+#howto-close{margin-top:10px;padding:2px 30px;font-size:22px}
+.pause-help{max-width:min(760px,94vw)}
+
+@media (max-height:500px){.sel-vs{display:none}}
+#select .difficulty button{white-space:nowrap}
+
+/* Fight World: budget mechanic removed; letterbox bars are black */
+#budget-meter,#touch-budget{display:none!important}
+html,body{background:#000}
+#game{background:#000}
+/* Fight World: symbol-only controls + round joystick (Nik's rule) */
+#touch .actions button{font-size:30px!important;line-height:1}
+#touch .stick,#touch .stick .ring,#touch .stick .knob{border-radius:50%!important}
+#pause-btn{font-size:20px}
