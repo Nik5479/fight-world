@@ -1692,7 +1692,7 @@ var an = [{
   wn = `./assets/intro-CxITfm7k.mp3`,
   Tn = `./assets/background-sFl8lOjr.mp3`,
   En = `./assets/battle-CqvMijZR.mp3`,
-  Dn = {},
+  Dn = {modi:`./voices/nilesh.mp3`,yogi:`./voices/faraz.mp3`,didi:`./voices/mei.mp3`,nitin:`./voices/kenji.mp3`,trump:`./voices/jack.mp3`,dhruv:`./voices/mick.mp3`,rahul:`./voices/oliver.mp3`,ravi:`./voices/ivan.mp3`,amit:`./voices/lucas.mp3`,lalu:`./voices/diego.mp3`,mbapu:`./voices/titan.mp3`},
   On = yn,
   kn = {},
   An = Cn,
@@ -2048,7 +2048,7 @@ var _i = 8,
   vi = .03,
   yi = 12.5,
   bi = -2,
-  xi = .88,
+  xi = 1,
   Si = class {
     constructor() {
       i(this, `ctx`, null), i(this, `master`, null), i(this, `musicGain`, null), i(this, `sfxBus`, null), i(this, `output`, null), i(this, `music`, null), i(this, `musicWasOn`, !0), i(this, `wantTrack`, {
@@ -2067,7 +2067,7 @@ var _i = 8,
         if (!t) return;
         this.ctx = new t;
         let n = this.ctx.createDynamicsCompressor();
-        n.threshold.value = bi, n.knee.value = 0, n.ratio.value = 20, n.attack.value = .002, n.release.value = .1, this.output = this.ctx.createGain(), this.output.gain.value = xi, n.connect(this.output).connect(this.ctx.destination), this.master = this.ctx.createGain(), this.master.gain.value = this.muted ? 0 : .7, this.master.connect(n), this.sfxBus = this.ctx.createGain(), this.sfxBus.gain.value = +!this.muted, this.sfxBus.connect(n), this.clipBus = this.ctx.createGain(), this.clipBus.connect(this.master), this.musicGain = this.ctx.createGain(), this.musicGain.gain.value = .22, this.musicGain.connect(this.master), this.music = new qn(this.ctx, this.musicGain, {
+        n.threshold.value = bi, n.knee.value = 0, n.ratio.value = 20, n.attack.value = .002, n.release.value = .1, this.output = this.ctx.createGain(), this.output.gain.value = xi, n.connect(this.output).connect(this.ctx.destination), this.master = this.ctx.createGain(), this.master.gain.value = this.muted ? 0 : 1, this.master.connect(n), this.sfxBus = this.ctx.createGain(), this.sfxBus.gain.value = +!this.muted, this.sfxBus.connect(n), this.clipBus = this.ctx.createGain(), this.clipBus.connect(this.master), this.musicGain = this.ctx.createGain(), this.musicGain.gain.value = .4, this.musicGain.connect(this.master), this.music = new qn(this.ctx, this.musicGain, {
           intro: {
             ...Nn.intro
           },
@@ -2091,7 +2091,7 @@ var _i = 8,
       return this.setMuted(!this.muted), this.muted
     }
     setMuted(e) {
-      this.muted = e, this.master && (this.master.gain.value = this.muted ? 0 : .7), this.sfxBus && (this.sfxBus.gain.value = +!this.muted), this.clip && (this.clip.muted = this.muted);
+      this.muted = e, this.master && (this.master.gain.value = this.muted ? 0 : 1), this.sfxBus && (this.sfxBus.gain.value = +!this.muted), this.clip && (this.clip.muted = this.muted);
       try {
         localStorage.setItem(hi, e ? `1` : `0`)
       } catch {}
@@ -9860,9 +9860,9 @@ var bc = class e extends ra {
 };
 nc = bc, i(bc, `DESK_UP`, .6), i(bc, `SIGN_END`, 2), i(bc, `SHOW_END`, 2.8), i(bc, `STAMP`, 5), i(bc, `STAMP_IN`, 3.5), i(bc, `LIFT`, nc.STAMP + .6), i(bc, `END`, nc.STAMP + 2.4), i(bc, `CRATES`, 20), i(bc, `TAGS`, 10), i(bc, `CHANT`, [`TARIFF!`, `TARIFF!!`, `50%!`, `HUGE!`, `TARIFF!`, `TREMENDOUS!`]);
 var xc = `./models/${M?`mobile/`:``}`,
-  Sc = `?v=20261104_webp`,
-  Cc = `?v=20261104_webp`,
-  wc = `?v=20261107_real`,
+  Sc = `?v=20261115_bodies`,
+  Cc = `?v=20261115_bodies`,
+  wc = `?v=20261115_bodies`,
   Tc = {
     modi: `${xc}modi.glb${Cc}`,
     rahul: `${xc}rahul.glb${Cc}`,
@@ -16856,7 +16856,7 @@ var Cf = class {
         speech: (t, r) => this.speech(t === `caster` ? e : n.side, r)
       }), r.superBanner(t.char, this.ctx.portraits[t.char.id], e, t.char.id === `nitin` ? 1e3 : 1700), r.setVignette(!0), a.setMood(.65);
       let l = Dn[t.char.id];
-      l && i.playClip(l), this.ctx.news.event({
+      l && i.playClip(l, 1.2), this.ctx.news.event({
         kind: `super`,
         caster: t.char.id,
         superName: t.char.superName
