@@ -1,7 +1,7 @@
 @font-face{font-family:'Bebas Neue';font-weight:400;font-display:swap;src:url(bebas-neue-latin-400-normal.woff2) format('woff2')}
 @font-face{font-family:'Teko';font-weight:500;font-display:swap;src:url(teko-latin-500-normal.woff2) format('woff2')}
 @font-face{font-family:'Teko';font-weight:700;font-display:swap;src:url(teko-latin-700-normal.woff2) format('woff2')}
-#budget-meter,#touch-budget,#newsdesk,#online-btn,#legal{display:none!important}
+#budget-meter,#touch-budget,#newsdesk,#online-btn{display:none!important}
 
 /* Fight World select-screen fixes */
 body:has(#select:not(.hidden)) #title,body:has(#select:not(.hidden)) #loading{display:none!important}
