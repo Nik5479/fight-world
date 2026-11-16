@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>document.documentElement.className+=" legal-accepted";</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,7 +69,7 @@
     </div>
     <div id="announce"></div>
 
-    <button id="budget-meter" type="button" aria-label="Use the budget"><span class="hint" aria-hidden="true"><span class="hint-key">PRESS <kbd>B</kbd></span><span class="hint-touch">TAP 📕</span> </span><b>📕</b><span class="label">BUDGET</span><div class="track"><i></i></div><span class="key">B</span></button>
+    <button id="budget-meter" type="button" aria-label="Special move"><b>📕</b><div class="track"><i></i></div></button>
 
     <div id="cinema">
       <!-- The Chapter 2 trailer video (src/trailerVideo.ts): downloaded on tap, then played. -->
@@ -110,7 +109,7 @@
         <button data-touch="punch" class="punch">👊</button>
         <button data-touch="kick" class="kick">🦵</button>
         
-        <button id="touch-budget" class="touch-budget" type="button" hidden aria-label="Use the budget">📕<small>BUDGET</small></button>
+        <button id="touch-budget" class="touch-budget" type="button" hidden aria-label="Special move">📕</button>
       </div>
     </div>
 
@@ -286,7 +285,7 @@
           </div>
         </div>
         <div class="sel-actions">
-          <button id="online-btn" class="online-btn" type="button">🌐</button>
+          <button id="online-btn" class="online-btn" type="button" hidden>🌐</button>
           <button id="fight-btn" class="big">⚔️</button>
         </div>
         <div id="online-bar" class="online-bar">
@@ -359,7 +358,16 @@
     <!-- Opening notice: shown once per device, above everything else (see src/legal.ts). -->
     <div id="legal" role="alertdialog" aria-modal="true" aria-labelledby="legal-title">
       <div class="legal-card">
-        <h2 id="legal-title"></h2>
+        <h2 id="legal-title">Fight World — Please Read</h2>
+        <div class="legal-scroll" tabindex="0">
+          <p class="legal-hi">Fight World is a work of fiction, made only for fun.</p>
+          <p>All fighters, names, countries, voices, stories and events in this game are fictional. They are not based on any real person, living or dead.</p>
+          <p>Any resemblance to a real person is purely coincidental. The game does not show, copy or mock any real person.</p>
+          <p>All voices in the game are computer-generated. All artwork, characters and stages are original creations.</p>
+          <p>This is a fantasy fighting game. Please play responsibly and enjoy the fight.</p>
+          <hr>
+          <p class="legal-agree">By tapping ✅ you confirm you understand that Fight World is fictional entertainment.</p>
+        </div>
         <button id="legal-ok" type="button" class="ready">✅</button>
       </div>
     </div>

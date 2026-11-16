@@ -1224,7 +1224,7 @@ var an = [{
         let t = -s / 2 + e / 119 * s;
         for (let n of [4.02, -4.02]) this.dummy.position.set(t, -.08 - Math.abs(Math.sin(e * .5)) * .08, n), this.dummy.updateMatrix(), p.setMatrixAt(m, this.dummy.matrix), p.setColorAt(m, new Be(e % 3 == 0 ? 16765466 : 16742928)), m++
       }
-      this.group.add(p), this.buildSansad(this.themeGroups.sansad), this.buildJantarMantar(this.themeGroups.jantar), At(this.themeGroups.road), this.crowd = new xe(new _e(.22, .5, 4, 8), new O({
+      this.group.add(p), this.buildSansad(this.themeGroups.sansad), this.buildStreetMarket(this.themeGroups.jantar), At(this.themeGroups.road), this.crowd = new xe(new _e(.22, .5, 4, 8), new O({
         roughness: .9
       }), 420), this.crowdHeads = new xe(new E(.16, 10, 8), new O({
         roughness: .8
@@ -1345,7 +1345,7 @@ var an = [{
         li.position.set(tt, 6.8, -2.6), li.userData.keepLight = !0, e.add(li)
       }
     }
-    buildJantarMantar(e) {
+    buildStreetMarket(e) {
       let t = new O({
           color: 12867391,
           roughness: .85
@@ -1502,7 +1502,7 @@ var an = [{
         i.position.set(-100 + t * 5 + Math.random() * 3, r / 2 - .3, -80 - Math.random() * 15), e.add(i)
       }
       let se = Yt(512, 160, e => {
-          e.fillStyle = `#7a2a1e`, e.fillRect(0, 0, 512, 160), e.strokeStyle = `#f1ebe0`, e.lineWidth = 8, e.strokeRect(8, 8, 496, 144), e.fillStyle = `#f7efe0`, e.textAlign = `center`, e.textBaseline = `middle`, e.font = `bold 64px Georgia, serif`, e.fillText(`JANTAR MANTAR`, 256, 62), e.font = `36px sans-serif`, e.fillText(`जंतर मंतर · NEW DELHI`, 256, 120)
+          e.fillStyle = `#7a2a1e`, e.fillRect(0, 0, 512, 160), e.strokeStyle = `#f1ebe0`, e.lineWidth = 8, e.strokeRect(8, 8, 496, 144), e.fillStyle = `#f7efe0`, e.textAlign = `center`, e.textBaseline = `middle`, e.font = `bold 56px Georgia, serif`, e.fillText(`STREET MARKET`, 256, 62), e.font = `36px sans-serif`, e.fillText(`FIGHT WORLD`, 256, 120)
         }),
         ce = new v(new w(5.2, 1.6, .2), [te, te, te, te, new O({
           map: se,
@@ -2004,16 +2004,16 @@ var li = ci(oi),
   di = [`ui_tap`, `ui_select`, `ui_confirm`, `ui_back`, `jingle_win`, `jingle_lose`, `hit_1`, `hit_2`, `hit_3`, `block`, `whoosh`, `thud`, `boom`, `slap`, `moo`, `cow_bell`, `chai_ting`, `cup_break`, `camera_clicks`, `news_sting`, `aloolelo`, `bomb`, `pataka`],
   fi = {
     modi: [`charge_chakra`, `bed_chakra`, `release_chakra`],
-    rahul: [`bed_tariff`, `release_tariff`, `eye_zing`, `poof`, `plop`, `horn_short`, `engine_loop`, `drumroll`, `kaching`, `coins`],
-    didi: [`bed_jadu`, `release_jadu`, `thunder`, `poof`, `frog`, `snap`, `plop`],
-    trump: [`bed_tariff`, `release_tariff`, `pen_scribble`, `kaching`, `coins`, `drumroll`, `crate_crash`, `stamp_slam`],
-    nitin: [`release_bulldozer`, `thunder`, `snap`, `plop`, `poof`, `metal_crunch`, `horn_short`],
-    yogi: [`bed_bulldozer`, `release_bulldozer`, `eye_zing`, `horn_long`, `horn_short`, `engine_loop`, `reverse_beeps`, `metal_crunch`],
+    rahul: [`eye_zing`, `poof`, `plop`, `horn_short`, `drumroll`, `coins`],
+    didi: [`thunder`, `poof`, `frog`, `snap`, `plop`],
+    trump: [`pen_scribble`, `coins`, `drumroll`, `crate_crash`, `stamp_slam`],
+    nitin: [`thunder`, `snap`, `plop`, `poof`, `metal_crunch`, `horn_short`],
+    yogi: [`eye_zing`, `horn_long`, `horn_short`, `reverse_beeps`, `metal_crunch`],
     mbapu: [`whoosh`, `thud`, `boom`, `slap`, `stamp_slam`],
-    ravi: [`release_tariff`, `reverse_beeps`, `eye_zing`, `snap`, `metal_crunch`, `kaching`, `coins`],
-    lalu: [`release_bulldozer`, `horn_long`, `horn_short`, `engine_loop`, `metal_crunch`, `thunder`],
-    amit: [`release_bulldozer`, `shimmer`, `bell`, `drumroll`, `heartbeat`],
-    dhruv: [`bed_tariff`, `release_tariff`, `shimmer`, `plop`, `eye_zing`, `bark`, `heartbeat`]
+    ravi: [`reverse_beeps`, `eye_zing`, `snap`, `metal_crunch`, `coins`],
+    lalu: [`horn_long`, `horn_short`, `metal_crunch`, `thunder`],
+    amit: [`shimmer`, `bell`, `drumroll`, `heartbeat`],
+    dhruv: [`shimmer`, `plop`, `eye_zing`, `bark`, `heartbeat`]
   },
   pi = {
     charge_chakra: 8 / 1.2,
@@ -4182,7 +4182,7 @@ var aa = class e extends ra {
     let A = u.arrow;
     if (o > this.GROW_START + .9 && o < a) {
       A.visible = !0, A.scale.setScalar(this.scale), A.position.set(d.x + c * (u.str.position.x - .1) * this.scale, d.y, d.z), A.rotation.set(0, c > 0 ? 0 : Math.PI, Math.sin(o * 3) * .01), this.throwFrom.copy(A.position), u.arrowGlow.material.opacity = .5 + draw * .5 + Math.sin(o * 25) * .1;
-      this.said || o < this.WIND + .2 || (this.said = !0, r.speech(`caster`, `Ab tera ant nishchit hai... BRAHMASTRA!`), r.popup && r.popup(`BRAHMASTRA!`, this.v2.set(s.x, s.y + 2.3, 0), `#ffd23f`), r.audio.startSuperBed(1.6, `jadu`));
+      this.said || o < this.WIND + .2 || (this.said = !0, r.speech(`caster`, `Ab tera ant nishchit hai... BRAHMASTRA!`), r.popup && r.popup(`BRAHMASTRA!`, this.v2.set(s.x, s.y + 2.3, 0), `#ffd23f`));
     } else if (o >= a && o < this.IMPACT) {
       this.released || (this.released = !0, r.audio.superRelease(`chakra`), r.audio.whoosh(), r.audio.thunder(), r.flash(`rgba(255,230,160,0.55)`, 140), r.cam.shake(.18, .3));
       let e2 = I((o - a) / (this.IMPACT - a)) ** 1.6;
@@ -4232,16 +4232,16 @@ i(aa, `RISE`, 1.6), i(aa, `RELEASE`, 5.95);
 // then slammed down on the target), 'erupt' (effect bursts from the ground
 // under the target). kind: procedural weapon/creature mesh.
 var LG = {
-  yogi: { name: `RUSTAM KA GURZ`, line: `Rustam ka gurz uthaya hai, ab bachna mushkil hai!`, bed: `bulldozer`, kind: `mace`, mode: `slam`, c1: 10053159, c2: 16762647, glow: 16753920, flash: `rgba(255,170,60,0.9)` },
-  didi: { name: `WUKONG KI LATHI`, line: `Bandar Raja ki lathi, seedha aasmaan se!`, bed: `jadu`, kind: `staff`, mode: `slam`, c1: 16762647, c2: 14680079, glow: 16766720, flash: `rgba(255,215,120,0.9)` },
-  nitin: { name: `KUSANAGI`, line: `Toofan ke devta ki talwar se bach ke dikha!`, bed: `jadu`, kind: `sword`, mode: `fly`, c1: 14671839, c2: 6710886, glow: 6724095, flash: `rgba(180,220,255,0.9)` },
-  trump: { name: `JOHN HENRY KA HATHODA`, line: `Ye hathoda pahaad tod deta hai, tu kya cheez hai!`, bed: `tariff`, kind: `hammer`, mode: `slam`, c1: 10263719, c2: 13132454, glow: 16747520, flash: `rgba(255,120,80,0.9)` },
+  yogi: { name: `RUSTAM KA GURZ`, line: `Rustam ka gurz uthaya hai, ab bachna mushkil hai!`, bed: null, kind: `mace`, mode: `slam`, c1: 10053159, c2: 16762647, glow: 16753920, flash: `rgba(255,170,60,0.9)` },
+  didi: { name: `WUKONG KI LATHI`, line: `Bandar Raja ki lathi, seedha aasmaan se!`, bed: null, kind: `staff`, mode: `slam`, c1: 16762647, c2: 14680079, glow: 16766720, flash: `rgba(255,215,120,0.9)` },
+  nitin: { name: `KUSANAGI`, line: `Toofan ke devta ki talwar se bach ke dikha!`, bed: null, kind: `sword`, mode: `fly`, c1: 14671839, c2: 6710886, glow: 6724095, flash: `rgba(180,220,255,0.9)` },
+  trump: { name: `JOHN HENRY KA HATHODA`, line: `Ye hathoda pahaad tod deta hai, tu kya cheez hai!`, bed: null, kind: `hammer`, mode: `slam`, c1: 10263719, c2: 13132454, glow: 16747520, flash: `rgba(255,120,80,0.9)` },
   dhruv: { name: `BUNYIP`, line: `Dalal ka shaitan jaag gaya, ab bhaag!`, bed: null, kind: `beast`, mode: `fly`, c1: 936522, c2: 3064568, glow: 3064568, flash: `rgba(80,230,200,0.85)` },
-  rahul: { name: `EXCALIBUR`, line: `Patthar se nikli talwar, ab tera faisla karegi!`, bed: `tariff`, kind: `sword`, mode: `fly`, c1: 16769448, c2: 16766720, glow: 16766720, flash: `rgba(255,230,160,0.95)` },
-  ravi: { name: `FIREBIRD`, line: `Aag ki chidiya aayi hai, ab tu raakh banega!`, bed: `jadu`, kind: `bird`, mode: `fly`, c1: 16733440, c2: 16753920, glow: 16753920, flash: `rgba(255,140,60,0.95)` },
+  rahul: { name: `EXCALIBUR`, line: `Patthar se nikli talwar, ab tera faisla karegi!`, bed: null, kind: `sword`, mode: `fly`, c1: 16769448, c2: 16766720, glow: 16766720, flash: `rgba(255,230,160,0.95)` },
+  ravi: { name: `FIREBIRD`, line: `Aag ki chidiya aayi hai, ab tu raakh banega!`, bed: null, kind: `bird`, mode: `fly`, c1: 16733440, c2: 16753920, glow: 16753920, flash: `rgba(255,140,60,0.95)` },
   amit: { name: `CURUPIRA`, line: `Jungle ka rakhwala jaag gaya!`, bed: null, kind: `vines`, mode: `erupt`, c1: 2245710, c2: 8882052, glow: 8882052, flash: `rgba(140,255,140,0.85)` },
-  lalu: { name: `QUETZALCOATL`, line: `Pankh wala naag aasmaan se utra!`, bed: `bulldozer`, kind: `serpent`, mode: `fly`, c1: 1475738, c2: 16762647, glow: 16762647, flash: `rgba(120,255,170,0.9)` },
-  mbapu: { name: `BHOOKAMP`, line: `Sabko hara ke aaya hai? Ab asli imtihaan shuru!`, bed: `bulldozer`, kind: `quake`, mode: `erupt`, c1: 9125192, c2: 16753920, glow: 16753920, flash: `rgba(255,120,40,0.95)` }
+  lalu: { name: `QUETZALCOATL`, line: `Pankh wala naag aasmaan se utra!`, bed: null, kind: `serpent`, mode: `fly`, c1: 1475738, c2: 16762647, glow: 16762647, flash: `rgba(120,255,170,0.9)` },
+  mbapu: { name: `BHOOKAMP`, line: `Sabko hara ke aaya hai? Ab asli imtihaan shuru!`, bed: null, kind: `quake`, mode: `erupt`, c1: 9125192, c2: 16753920, glow: 16753920, flash: `rgba(255,120,40,0.95)` }
 };
 function LG_mat(c, e, m, r) { return new O({ color: c, emissive: e || c, emissiveIntensity: m == null ? .8 : m, metalness: r == null ? .6 : r, roughness: .35, side: 2 }) }
 function LG_weapon(kind, c1, c2) {
@@ -4347,7 +4347,7 @@ var Lg = class e extends ra {
     let A = u.root;
     if (o > this.GROW_START + .9 && o < a) {
       this.throwFrom.copy(A.position);
-      this.said || o < this.WIND + .2 || (this.said = !0, r.speech(`caster`, cfg.line), r.popup && r.popup(cfg.name + `!`, this.v2.set(s.x, s.y + 2.3, 0), `#ffd23f`), cfg.bed && r.audio.startSuperBed(1.6, `jadu`));
+      this.said || o < this.WIND + .2 || (this.said = !0, r.speech(`caster`, cfg.line), r.popup && r.popup(cfg.name + `!`, this.v2.set(s.x, s.y + 2.3, 0), `#ffd23f`));
     } else if (o >= a && o < this.IMPACT) {
       this.released || (this.released = !0, cfg.bed ? r.audio.superRelease(cfg.bed) : r.audio.superRelease(`chakra`), r.audio.whoosh(), r.audio.thunder(), r.flash(cfg.flash, 140), r.cam.shake(.18, .3));
       let e2 = I((o - a) / (this.IMPACT - a)) ** 1.6;
@@ -9940,10 +9940,22 @@ function Gc(e, t) {
       a = () => {
         window.clearTimeout(i), i = window.setTimeout(() => r(Error(`download stalled: ${t}`)), Wc)
       };
-    a(), e.load(t, e => {
-      window.clearTimeout(i), n(e)
-    }, a, e => {
-      window.clearTimeout(i), r(e)
+    a(), fetch(t).then(async s => {
+      if (!s.ok) throw Error(`HTTP ${s.status}: ${t}`);
+      let o = s.body?.getReader(), d = [];
+      if (o) for (;;) {
+        let { done: c, value: u } = await o.read();
+        if (c) break;
+        a(), d.push(u)
+      } else d.push(new Uint8Array(await s.arrayBuffer()));
+      window.clearTimeout(i);
+      let p = 0;
+      for (let v of d) p += v.length;
+      let u = new Uint8Array(p), g = 0;
+      for (let v of d) u.set(v, g), g += v.length;
+      e.parse(u.buffer, t.split(`?`)[0].slice(0, t.split(`?`)[0].lastIndexOf(`/`) + 1), n, s => r(s))
+    }).catch(s => {
+      window.clearTimeout(i), r(s)
     })
   })
 }
