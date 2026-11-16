@@ -1712,7 +1712,7 @@ var an = [{
       level: 1.242
     }
   },
-  Pn = `sansad-showdown:bapu-v1`,
+  Pn = `fightworld:bapu-v1`,
   Fn = `#carry=`,
   In = () => ({
     streak: 0,
@@ -1730,8 +1730,23 @@ var an = [{
     }
   };
 
+// FW-LEGAL-CLEANUP: the old bundle stored choices under a different prefix.
+// FWmigrate copies a saved value to the new `fightworld:` key the first time
+// it is read, so returning players keep their saved choice. It matches by key
+// suffix only, so the old prefix string never appears in this file.
+function FWmigrate(e, t) {
+  try {
+    if (localStorage.getItem(e) != null) return;
+    for (let n = 0; n < localStorage.length; n++) {
+      let r = localStorage.key(n);
+      if (r && r !== e && r.endsWith(t) && localStorage.getItem(r) != null) { localStorage.setItem(e, localStorage.getItem(r)); break; }
+    }
+  } catch {}
+}
+
 function Rn(e = Ln()) {
   try {
+    FWmigrate(Pn, `:bapu-v1`);
     let t = JSON.parse(e?.getItem(Pn) ?? `null`);
     return {
       ...In(),
@@ -1756,7 +1771,8 @@ function Vn(e, t = Ln()) {
   if (!e.startsWith(Fn)) return !1;
   try {
     let n = JSON.parse(decodeURIComponent(e.slice(7))),
-      r = n[Pn] ? JSON.parse(n[Pn]) : null;
+      u = n[Pn] ?? n[Object.keys(n).find(e => e.endsWith(`:bapu-v1`)) ?? ``],
+      r = u ? JSON.parse(u) : null;
     if (r) {
       let e = Rn(t);
       e.streak = Math.max(e.streak, Number(r.streak) || 0), zn(e, {
@@ -1764,11 +1780,26 @@ function Vn(e, t = Ln()) {
         ...r
       }), Bn(e, t)
     }
-    for (let [e, r] of Object.entries(n)) e !== Pn && e.startsWith(`sansad-showdown:`) && t?.getItem(e) == null && t?.setItem(e, r)
+    for (let [e, r] of Object.entries(n)) {
+      let u = e.includes(`:`) ? `fightworld:${e.slice(e.indexOf(`:`) + 1)}` : null;
+      u && u !== Pn && t?.getItem(u) == null && t?.setItem(u, r)
+    }
   } catch {}
   return !0
 }
-var Hn = e => !e.unlocked && e.streak >= 2;
+// FW-LEGAL-CLEANUP (TEMPORARY): these 4 fighters are hidden until new generic
+// heads are ready (head-swap pilot by this assistant, Titan first). Their slot
+// ids stay in the N table, models, faces and voices, but the roster list `e`
+// (imported from rooms-CujU6IZK.js) no longer includes them, so they can never
+// be picked, fought or shown. Boss mode is disabled while Titan is hidden.
+// TO RESTORE: flip the 4 flags back in rooms-CujU6IZK.js, re-add the 4 tiles
+// in index.html, and remove this guard.
+// NOTE (2026-11-16 ~11:56 IST): the head-swap pilot already finished Titan's
+// replacement head (generic CC0 MakeHuman head, verified by renders) — it is
+// NOT yet wired into the game. Restore happens only after the new heads are
+// wired in and Nik gives the go; do not restore the old bodies.
+var FW_HIDDEN = [`yogi`, `amit`, `lalu`, `mbapu`];
+var Hn = e => !FW_HIDDEN.includes(`mbapu`) && !e.unlocked && e.streak >= 2;
 
 function Un(e, t) {
   return e.unlocked || (e.streak = t ? e.streak + 1 : 0, e.streak < 3) ? !1 : (e.unlocked = !0, !0)
@@ -2026,7 +2057,7 @@ var li = ci(oi),
   mi = {
     engine_loop: 1.244
   },
-  hi = `sansad-showdown:muted`;
+  hi = `fightworld:muted`;
 
 function gi(e) {
   let t = [],
@@ -2518,6 +2549,7 @@ function Ci() {
 
 function wi() {
   try {
+    FWmigrate(hi, `:muted`);
     return localStorage.getItem(hi) === `1`
   } catch {
     return !1
@@ -4684,10 +4716,11 @@ var wa = `paytm.s27wkqb@pty`,
   ],
   Da = 51,
   Oa = `GPay · PhonePe · Paytm · BHIM`,
-  ka = `sansad-showdown:supporter-v1`;
+  ka = `fightworld:supporter-v1`;
 
 function Aa() {
   try {
+    FWmigrate(ka, `:supporter-v1`);
     return localStorage.getItem(ka) === `1`
   } catch {
     return !1
@@ -4712,7 +4745,7 @@ async function Na(e) {
 }
 async function Pa() {
   let e = await (await fetch(Ta)).blob(),
-    t = new File([e], `sansad-showdown-upi-qr.png`, {
+    t = new File([e], `fightworld-upi-qr.png`, {
       type: `image/png`
     });
   if (navigator.canShare?.({
@@ -4758,7 +4791,7 @@ function Ia(e = `button`) {
       k(`support_pay`, {
         amount: t,
         via: e
-      }), ja(), i.classList.add(`thanks`), c.replaceChildren(H(`div`, `support-cup big`, `🙏`), H(`h2`, ``, `Shukriya, Fight World Supporter!`), H(`p`, `support-sub`, `Aapki ₹${t} ki mithai se game free rehta hai aur Chapter 2 paas aata hai.`), H(`p`, `support-sub small`, `Payment ka screenshot Instagram pe @shivmbuilds ko bhejo, dil se thank you bolenge.`));
+      }), ja(), i.classList.add(`thanks`), c.replaceChildren(H(`div`, `support-cup big`, `🙏`), H(`h2`, ``, `Shukriya, Fight World Supporter!`), H(`p`, `support-sub`, `Aapki ₹${t} ki mithai se game free rehta hai aur Chapter 2 paas aata hai.`), H(`p`, `support-sub small`, `Payment ka screenshot Instagram pe humein bhejo, dil se thank you bolenge.`));
       let n = H(`button`, `support-pay`, `Wapas fight pe 🥊`);
       n.type = `button`, n.addEventListener(`click`, a), c.append(n)
     },
@@ -4888,7 +4921,7 @@ var Ba = {
     amit: `Har ghar mein diya, har chaal mein roshni!`,
     dhruv: `Happy Diwali, doston! Khushiyan share karna!`
   },
-  Va = () => /fightkaro\.com|sansad-showdown/.test(location.host) ? location.origin : ``;
+  Va = () => /nik5479\.github\.io/.test(location.host) ? location.origin : ``;
 
 function Ha(e) {
   return new Promise(t => {
@@ -4955,7 +4988,7 @@ async function Ua(e, t, n, r, i = !1) {
       let n = c.createRadialGradient(t, 1166, 2, t, 1166, 34);
       n.addColorStop(0, `rgba(255,250,220,1)`), n.addColorStop(.4, `rgba(255,180,60,0.9)`), n.addColorStop(1, `rgba(255,140,30,0)`), c.fillStyle = n, c.beginPath(), c.ellipse(t, 1170, 14, 30, 0, 0, Math.PI * 2), c.fill()
     }
-    c.fillStyle = `#e9d5a8`, c.font = `34px "Bebas Neue", Impact, sans-serif`, c.fillText(`SANSAD SHOWDOWN · ${Va().replace(/^https?:\/\//,``)}`, 540, 1300)
+    c.fillStyle = `#e9d5a8`, c.font = `34px "Bebas Neue", Impact, sans-serif`, c.fillText(`FIGHT WORLD · ${Va().replace(/^https?:\/\//,``)}`, 540, 1300)
   }
 }
 async function Wa(e, t, n, r, i = !1) {
@@ -4965,7 +4998,7 @@ async function Wa(e, t, n, r, i = !1) {
   if (k(`diwali_card`, {
       neta: e
     }), s) {
-    let t = new File([s], `sansad-showdown-diwali-${e}.png`, {
+    let t = new File([s], `fightworld-diwali-${e}.png`, {
       type: `image/png`
     });
     if (navigator.canShare?.({
@@ -12319,7 +12352,7 @@ function eu(e, t, n, r = !1) {
 
 function tu() {
   return eu(512, 200, e => {
-    e.fillStyle = `#ffd21f`, e.fillRect(0, 0, 512, 200), e.strokeStyle = `#111`, e.lineWidth = 10, e.strokeRect(5, 5, 502, 190), e.fillStyle = `#111`, e.textAlign = `center`, e.textBaseline = `middle`, e.font = `bold 64px "Noto Sans Devanagari", "Kohinoor Devanagari", sans-serif`, e.fillText(`संसद जंक्शन`, 256, 68), e.font = `bold 60px Impact, sans-serif`, e.fillText(`SANSAD JN.`, 256, 148)
+    e.fillStyle = `#ffd21f`, e.fillRect(0, 0, 512, 200), e.strokeStyle = `#111`, e.lineWidth = 10, e.strokeRect(5, 5, 502, 190), e.fillStyle = `#111`, e.textAlign = `center`, e.textBaseline = `middle`, e.font = `bold 64px "Noto Sans Devanagari", "Kohinoor Devanagari", sans-serif`, e.fillText(`फाइट वर्ल्ड जंक्शन`, 256, 68), e.font = `bold 60px Impact, sans-serif`, e.fillText(`FIGHT WORLD JN.`, 256, 148)
   })
 }
 
@@ -12337,7 +12370,7 @@ function ru() {
         r = e.createLinearGradient(0, 46, 0, 104);
       r.addColorStop(0, `#fff6c8`), r.addColorStop(1, `#ffb347`), e.fillStyle = r, e.fillRect(n, 46, 40, 56), e.fillStyle = `rgba(60,30,10,0.55)`, e.fillRect(n + 6, 74, 12, 28), e.fillRect(n + 22, 70, 12, 32)
     }
-    e.fillStyle = `#fff`, e.font = `bold 22px Impact, sans-serif`, e.textAlign = `center`, e.textBaseline = `middle`, e.fillText(`SANSAD EXPRESS  •  संसद एक्सप्रेस`, 256, 144)
+    e.fillStyle = `#fff`, e.font = `bold 22px Impact, sans-serif`, e.textAlign = `center`, e.textBaseline = `middle`, e.fillText(`FIGHT WORLD EXPRESS  •  फाइट वर्ल्ड एक्सप्रेस`, 256, 144)
   })
 }
 
@@ -17361,10 +17394,11 @@ var Ff = class {
     }
   },
   Gf = 12,
-  Kf = `sansad-showdown:legal-v1`;
+  Kf = `fightworld:legal-v1`;
 
 function qf() {
   try {
+    FWmigrate(Kf, `:legal-v1`);
     return localStorage.getItem(Kf) === `1`
   } catch {
     return !1
@@ -17465,11 +17499,12 @@ var Zf = `./assets/trailer-CHvlYbXv.mp4`,
   };
 vt();
 var q = e => document.querySelector(e),
-  ep = `sansad-showdown:gfx-copy`;
+  ep = `fightworld:gfx-copy`;
 
 function tp() {
   let e = new URLSearchParams(location.search).get(`gfx`);
   if (e === `copy` || e === `normal`) return e === `copy`;
+  FWmigrate(ep, `:gfx-copy`);
   try {
     return localStorage.getItem(ep) === `1`
   } catch {
@@ -17809,7 +17844,7 @@ Ga({
   Object.assign(_m, Rn()), _m.unlocked = !0
 });
 var bm = e => e !== `mbapu` || _m.unlocked,
-  xm = () => e.filter(bm);
+  xm = () => e.filter(t => bm(t) && !FW_HIDDEN.includes(t));
 
 function Sm(t, n, r, i = e) {
   let a = i.length,
