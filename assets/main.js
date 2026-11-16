@@ -9932,7 +9932,7 @@ function Uc(e) {
   }
   return Hc
 }
-var Wc = 12e3;
+var Wc = 30e3; // No-download-progress stall window (Gc/Jc). 12s fired spuriously: 1MB GLBs stall >12s on slow/flaky links (proxy/mobile); 30s of zero bytes = genuinely dead. Decode is untimed (Gc/Jc split download from parse).
 
 function Gc(e, t) {
   return new Promise((n, r) => {
